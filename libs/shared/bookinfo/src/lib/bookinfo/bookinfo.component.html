@@ -1,0 +1,25 @@
+<mat-card class="book-card" fxFlex="0 1 calc(60% - 32px)"  *ngIf="bookInfo?.id">
+    <mat-card-header>
+      <mat-card-title class="book--title">{{bookInfo?.volumeInfo?.title}}</mat-card-title>
+     
+    </mat-card-header>
+    <img mat-card-image class="logo-image" [src]="bookInfo?.volumeInfo?.imageLinks?.thumbnail" alt="Photo of a Book">
+    <mat-card-content class="book--description">
+      <p><strong>Rating:</strong> 
+        <ecommerce-star-rating></ecommerce-star-rating>
+      </p>
+      <p><strong>Publisher:</strong> {{bookInfo?.volumeInfo?.publisher}}</p>
+      <p><strong>Page Count:</strong>{{bookInfo?.volumeInfo?.printedPageCount}}</p>
+      <p><strong>Language:</strong>  {{bookInfo?.volumeInfo?.language}}</p>
+      <p> {{bookInfo?.volumeInfo?.description}} </p>
+      <mat-card-title>Written By</mat-card-title>
+      <mat-card-subtitle>{{bookInfo?.volumeInfo?.authors?.toString()}}</mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer>
+
+        <mat-card-actions>
+          <button mat-button color="accent" type="submit" class="add-to-cart" (click)="addToCart(bookInfo)" >ADD TO CART</button>
+          <button mat-button color="accent" type="submit" class="buy-button" (click)="buy(bookInfo)">BUY</button>
+        </mat-card-actions>
+    </mat-card-footer>
+  </mat-card>

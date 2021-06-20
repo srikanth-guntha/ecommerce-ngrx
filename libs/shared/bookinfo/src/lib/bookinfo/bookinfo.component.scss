@@ -1,0 +1,34 @@
+:host {
+  justify-content: center;
+  display: flex;
+}
+.book-card {
+  max-width: 40%;
+  margin: 4rem;
+  .book--title,
+  .book--subtitle,
+  .book--description {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+  .logo-image {
+    width: calc(18% + 32px);
+    height: calc(40% + 32px);
+    float: right;
+  }
+  .book--description {
+    -webkit-line-clamp: 5;
+  }
+}
+.book-header-image {
+  background-size: cover;
+}
+@media screen and (max-width: 720px) {
+  .book-card {
+    max-width: 100%;
+  }
+}

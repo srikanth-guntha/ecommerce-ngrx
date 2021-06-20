@@ -1,0 +1,5 @@
+<span class="star-rating-container star-rating-animation" fxLayout="row" fxLayoutAlign="start center" >
+    <span *ngFor="let star of stars" [ngClass]="[star.class]" (click)="selectStar(star.id)">
+        <mat-icon>{{star.icon}}</mat-icon>
+    </span>
+</span>

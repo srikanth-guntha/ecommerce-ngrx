@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "ekart",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "ekart": {
+      "projectType": "application",
+      "root": "apps/ekart",
+      "sourceRoot": "apps/ekart/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/ekart",
+            "index": "apps/ekart/src/index.html",
+            "main": "apps/ekart/src/main.ts",
+            "polyfills": "apps/ekart/src/polyfills.ts",
+            "tsConfig": "apps/ekart/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/ekart/src/favicon.ico", "apps/ekart/src/assets"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/ekart/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/ekart/src/environments/environment.ts",
+                  "with": "apps/ekart/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ekart:build:production"
+            },
+            "development": {
+              "browserTarget": "ekart:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ekart:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ekart/src/**/*.ts",
+              "apps/ekart/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/ekart"],
+          "options": {
+            "jestConfig": "apps/ekart/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ekart-e2e": {
+      "root": "apps/ekart-e2e",
+      "sourceRoot": "apps/ekart-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ekart-e2e/cypress.json",
+            "tsConfig": "apps/ekart-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ekart:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ekart:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/ekart-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "ui-navbar": {
+      "projectType": "library",
+      "root": "libs/ui/navbar",
+      "sourceRoot": "libs/ui/navbar/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/navbar"],
+          "options": {
+            "jestConfig": "libs/ui/navbar/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/navbar/src/**/*.ts",
+              "libs/ui/navbar/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-material": {
+      "projectType": "library",
+      "root": "libs/shared/material",
+      "sourceRoot": "libs/shared/material/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/material"],
+          "options": {
+            "jestConfig": "libs/shared/material/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/material/src/**/*.ts",
+              "libs/shared/material/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "features-search": {
+      "projectType": "library",
+      "root": "libs/features/search",
+      "sourceRoot": "libs/features/search/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/search"],
+          "options": {
+            "jestConfig": "libs/features/search/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/search/src/**/*.ts",
+              "libs/features/search/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-services": {
+      "projectType": "library",
+      "root": "libs/shared/services",
+      "sourceRoot": "libs/shared/services/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/services"],
+          "options": {
+            "jestConfig": "libs/shared/services/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/services/src/**/*.ts",
+              "libs/shared/services/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "features-cart": {
+      "projectType": "library",
+      "root": "libs/features/cart",
+      "sourceRoot": "libs/features/cart/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/cart"],
+          "options": {
+            "jestConfig": "libs/features/cart/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/cart/src/**/*.ts",
+              "libs/features/cart/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "features-collection": {
+      "projectType": "library",
+      "root": "libs/features/collection",
+      "sourceRoot": "libs/features/collection/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/collection"],
+          "options": {
+            "jestConfig": "libs/features/collection/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/collection/src/**/*.ts",
+              "libs/features/collection/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-bookinfo": {
+      "projectType": "library",
+      "root": "libs/shared/bookinfo",
+      "sourceRoot": "libs/shared/bookinfo/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/bookinfo"],
+          "options": {
+            "jestConfig": "libs/shared/bookinfo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/bookinfo/src/**/*.ts",
+              "libs/shared/bookinfo/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "features-billing": {
+      "projectType": "library",
+      "root": "libs/features/billing",
+      "sourceRoot": "libs/features/billing/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/billing"],
+          "options": {
+            "jestConfig": "libs/features/billing/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/billing/src/**/*.ts",
+              "libs/features/billing/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "ui-mat-card-list": {
+      "projectType": "library",
+      "root": "libs/ui/mat-card-list",
+      "sourceRoot": "libs/ui/mat-card-list/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/mat-card-list"],
+          "options": {
+            "jestConfig": "libs/ui/mat-card-list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/mat-card-list/src/**/*.ts",
+              "libs/ui/mat-card-list/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-dialog": {
+      "projectType": "library",
+      "root": "libs/shared/dialog",
+      "sourceRoot": "libs/shared/dialog/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/dialog"],
+          "options": {
+            "jestConfig": "libs/shared/dialog/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/dialog/src/**/*.ts",
+              "libs/shared/dialog/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-star-rating": {
+      "projectType": "library",
+      "root": "libs/shared/star-rating",
+      "sourceRoot": "libs/shared/star-rating/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/star-rating"],
+          "options": {
+            "jestConfig": "libs/shared/star-rating/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/star-rating/src/**/*.ts",
+              "libs/shared/star-rating/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-ekart-store": {
+      "projectType": "library",
+      "root": "libs/shared/ekart-store",
+      "sourceRoot": "libs/shared/ekart-store/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/ekart-store"],
+          "options": {
+            "jestConfig": "libs/shared/ekart-store/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/ekart-store/src/**/*.ts",
+              "libs/shared/ekart-store/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-utils": {
+      "projectType": "library",
+      "root": "libs/shared/utils",
+      "sourceRoot": "libs/shared/utils/src",
+      "prefix": "ecommerce",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/utils"],
+          "options": {
+            "jestConfig": "libs/shared/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/utils/src/**/*.ts",
+              "libs/shared/utils/src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

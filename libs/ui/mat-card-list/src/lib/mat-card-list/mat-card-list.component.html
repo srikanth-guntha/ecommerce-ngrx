@@ -1,0 +1,22 @@
+<div class="cardList" fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" *ngIf="bookList">
+    <ng-template ngFor let-book [ngForOf]="bookList" let-i="index" [ngForTrackBy]="trackByFn">
+        <mat-card class="book-card" fxFlex="0 1 calc(33.3% - 32px)" (click)="showBookInfo(book)">
+            <mat-card-header>
+              <img mat-card-avatar class="book-header-image" [src]="book?.volumeInfo?.imageLinks?.thumbnail">
+              <mat-card-title class="book-title">{{book?.volumeInfo?.title}}</mat-card-title>
+              <mat-card-subtitle class="book-subtitle">{{book?.volumeInfo?.subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="book?.volumeInfo?.imageLinks?.thumbnail" alt="Photo of a Book">
+            <mat-card-content class="book-description">
+              <p>
+               {{book?.volumeInfo?.description}}
+              </p>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-title>Written By</mat-card-title>
+              <mat-card-subtitle>{{book?.volumeInfo?.authors?.toString()}}</mat-card-subtitle>
+              <button *ngIf="showDelete" class="delete-button" mat-button color="ascent" (click)="delete(book)">delete</button>
+            </mat-card-footer>
+        </mat-card>
+      </ng-template>
+</div>

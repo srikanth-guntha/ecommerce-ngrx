@@ -1,0 +1,8 @@
+<form class="search-form">
+    <!-- <mat-label>search books</mat-label> -->
+    <mat-form-field>
+        <input type="text" id="searchVal" [value]="searchString$ | async" matInput
+            (change)="searchBooksBySearchName(input.value)" #input>
+    </mat-form-field>
+</form>
+<ecommerce-mat-card-list [showDelete]="showDelete" [bookList]="searchBooks"></ecommerce-mat-card-list>
