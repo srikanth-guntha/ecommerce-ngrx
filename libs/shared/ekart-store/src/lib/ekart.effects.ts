@@ -35,7 +35,7 @@ export class searchEffects {
       switchMap((action) => {
         return action.bookId
           ? this.ekartService.getBookInfo(action.bookId).pipe(
-              map((data: any) => {
+              map((data: Book) => {
                 return storeBookInfo({ bookInfo: data });
               })
             )
