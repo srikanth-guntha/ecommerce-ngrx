@@ -55,9 +55,18 @@ const _ekartReducer = createReducer(
     };
   }),
   on(ekartActions.searchBooksSuccess, (state, action) => {
+    const recentSearchList = Object.assign([], state.recentSearchList);
+    if (recentSearchList.length >= 5) {
+      recentSearchList.unshift();
+    }
+    recentSearchList.push({
+      searchString: state.searchString,
+      searchBooks: action.searchBooks,
+    });
     return {
       ...state,
       searchBooks: [...action.searchBooks],
+      recentSearchList,
     };
   }),
   on(ekartActions.storeBookInfo, (state, action) => {

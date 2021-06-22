@@ -41,7 +41,6 @@ export class searchEffects {
                 return searchBooksSuccess({ searchBooks: books });
               }),
               catchError((err: HttpErrorResponse) => {
-                console.log('caught mapping error and rethrowing', err);
                 return of(
                   searchBooksFailure({
                     errorMsg: err.message,
@@ -79,7 +78,7 @@ export class searchEffects {
                 return of(
                   loadBookFailure({
                     errorMsg: error.message,
-                    bookInfo: { id: '' },
+                    bookInfo: { id: 'fail' },
                   })
                 );
               })

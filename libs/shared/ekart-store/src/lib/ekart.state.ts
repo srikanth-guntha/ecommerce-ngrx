@@ -9,4 +9,5 @@ export const initialState: InitState = {
   bookInfo: { id: 'angular' },
   searchErrorMessage: '',
   bookDetailsErrorMessage: '',
+  recentSearchList: [],
 };

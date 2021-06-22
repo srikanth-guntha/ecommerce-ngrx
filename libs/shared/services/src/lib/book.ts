@@ -23,6 +23,10 @@ export interface Books {
   kind: string;
 }
 
+export interface recentSearch {
+  searchString: string;
+  searchBooks: Book[];
+}
 export interface InitState {
   searchString: string;
   searchBooks: Book[];
@@ -32,6 +36,7 @@ export interface InitState {
   bookInfo: Book;
   searchErrorMessage: string;
   bookDetailsErrorMessage: string;
+  recentSearchList: recentSearch[];
 }
 
 export const bookInfo: Book = {

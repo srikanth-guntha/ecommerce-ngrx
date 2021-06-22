@@ -34,6 +34,7 @@ const mockEkartFacade = {
   addToCart: () => {
     return;
   },
+  loadBookFailureInfo$: of({ errorMessage: 'error' }),
 };
 
 describe('BookinfoComponent', () => {
@@ -58,6 +59,7 @@ describe('BookinfoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BookinfoComponent);
     component = fixture.componentInstance;
+    component.errorMessage = '';
     fixture.detectChanges();
   });
 

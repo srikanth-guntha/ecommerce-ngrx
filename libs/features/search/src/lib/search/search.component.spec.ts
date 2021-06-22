@@ -13,6 +13,7 @@ import { By } from '@angular/platform-browser';
 const mockEkartFacade = {
   getSearchString$: of('angular'),
   getSearchBooksSuccess$: of([{ id: 'angular', volumeInfo: { authors: [] } }]),
+  getBookFailureInfo$: of({ errorMessage: '' }),
   loadSearchBooks(searchString: string) {
     return;
   },
@@ -38,6 +39,7 @@ describe('SearchComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
+    component.errorMessage = 'error';
     fixture.detectChanges();
   });
 
@@ -48,6 +50,13 @@ describe('SearchComponent', () => {
   it('should call getSearchBooksSuccess$ on load', (done) => {
     mockEkartFacade.getSearchBooksSuccess$.subscribe((data) => {
       expect(component.searchBooks).toEqual(data);
+      done();
+    });
+  });
+
+  it('should call getBookFailureInfo$ on load', (done) => {
+    mockEkartFacade.getBookFailureInfo$.subscribe((data) => {
+      expect(component.errorMessage).toEqual(data);
       done();
     });
   });

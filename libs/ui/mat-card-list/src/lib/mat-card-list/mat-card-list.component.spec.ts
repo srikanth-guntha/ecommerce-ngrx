@@ -34,6 +34,7 @@ describe('MatCardListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MatCardListComponent);
     component = fixture.componentInstance;
+    component.errorMessage = '';
     fixture.detectChanges();
   });
 
@@ -70,4 +71,3 @@ describe('MatCardListComponent', () => {
     expect(component.trackByFn(1, { id: 'angular' })).toBe('angular');
   });
 });
-9;

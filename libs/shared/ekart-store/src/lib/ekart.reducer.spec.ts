@@ -91,6 +91,27 @@ describe('Ekart Reducer', () => {
   });
 
   it('searchBooks length should be 2', () => {
+    const state = {
+      ...initialState,
+      recentSearchList: [
+        { searchString: 'a', searchBooks: [{ id: '1' }] },
+        { searchString: 'b', searchBooks: [{ id: '1' }] },
+        { searchString: 'c', searchBooks: [{ id: '1' }] },
+        { searchString: 'd', searchBooks: [{ id: '1' }] },
+        { searchString: 'e', searchBooks: [{ id: '1' }] },
+      ],
+    };
+    const action = {
+      type: 'searchBooksSuccess',
+      searchBooks: [{ ...bookInfo }],
+    };
+    const { recentSearchList } = EkartReducer(state, action);
+    expect(
+      recentSearchList[recentSearchList.length - 1].searchBooks[0].id
+    ).toBe('angular');
+  });
+
+  it('searchBooks length should be 2', () => {
     const state = { ...initialState };
     const action = {
       type: 'storeBookInfo',
@@ -98,5 +119,25 @@ describe('Ekart Reducer', () => {
     };
     const { bookInfo } = EkartReducer(state, action);
     expect(bookInfo.id).toBe('angular');
+  });
+
+  it('searchBooks errorMsg should be displayed', () => {
+    const state = { ...initialState };
+    const action = {
+      type: 'searchBooksFailure',
+      errorMsg: 'Api failure',
+    };
+    const { searchErrorMessage } = EkartReducer(state, action);
+    expect(searchErrorMessage).toBe('Api failure');
+  });
+
+  it('loadBookInfo errorMsg should be displayed', () => {
+    const state = { ...initialState };
+    const action = {
+      type: 'loadBookFailure',
+      errorMsg: 'Api failure',
+    };
+    const { bookDetailsErrorMessage } = EkartReducer(state, action);
+    expect(bookDetailsErrorMessage).toBe('Api failure');
   });
 });

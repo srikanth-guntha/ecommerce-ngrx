@@ -29,8 +29,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
     );
     this.ekartFacade.getBookFailureInfo$.subscribe((error) => {
-      console.log(error);
-      //this.errorMessage = error;
       if (error) this.errorMessage = error;
     });
   }
