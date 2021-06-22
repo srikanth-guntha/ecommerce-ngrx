@@ -12,6 +12,7 @@ import { EkartFacade } from '@ecommerce/shared/ekart-store';
 export class CartComponent implements OnInit, OnDestroy {
   public cartItems: Book[] = [];
   public showDelete = true;
+  public errorMessage = '';
   cartItemsSubscription!: Subscription;
 
   constructor(private router: Router, private ekartFacade: EkartFacade) {}

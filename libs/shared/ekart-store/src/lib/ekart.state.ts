@@ -7,5 +7,6 @@ export const initialState: InitState = {
   badgeNumber: 0,
   booksCollection: [],
   bookInfo: { id: 'angular' },
-  errorMessage: '',
+  searchErrorMessage: '',
+  bookDetailsErrorMessage: '',
 };

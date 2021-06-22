@@ -11,6 +11,7 @@ import { EkartFacade } from '@ecommerce/shared/ekart-store';
 export class MycollectionComponent implements OnInit, OnDestroy {
   public bookCollection!: Book[];
   public showDelete = false;
+  public errorMessage = '';
   collectionItemsSubscription!: Subscription;
 
   constructor(private ekartFacade: EkartFacade) {}

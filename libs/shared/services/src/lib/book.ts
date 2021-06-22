@@ -30,7 +30,8 @@ export interface InitState {
   badgeNumber: number;
   booksCollection: Book[];
   bookInfo: Book;
-  errorMessage: string;
+  searchErrorMessage: string;
+  bookDetailsErrorMessage: string;
 }
 
 export const bookInfo: Book = {

@@ -17,6 +17,7 @@ export class BookinfoComponent implements OnInit, OnDestroy {
   bookId = '';
   cartItems: Book[] = [];
   duplicateBook = false;
+  errorMessage = '';
   bookSubscription: Subscription = new Subscription();
   cartItemsSubscription!: Subscription;
 
@@ -35,6 +36,9 @@ export class BookinfoComponent implements OnInit, OnDestroy {
     this.ekartFacade.getBookInfo(this.bookId);
     this.bookSubscription = this.ekartFacade.showBookInfo$.subscribe((data) => {
       this.bookInfo = data;
+    });
+    this.ekartFacade.loadBookFailureInfo$.subscribe((error) => {
+      this.errorMessage = error;
     });
   }
 

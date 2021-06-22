@@ -27,5 +27,9 @@ export const showBookInfo = createSelector(eKartAppState, (state) => {
 });
 
 export const getBookFailureInfo = createSelector(eKartAppState, (state) => {
-  return state.errorMessage;
+  return state.searchErrorMessage;
+});
+
+export const loadBookFailureInfo = createSelector(eKartAppState, (state) => {
+  return state.bookDetailsErrorMessage;
 });

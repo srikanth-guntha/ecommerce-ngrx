@@ -4,8 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import {
   getBookInfo,
-  loadBookFailureInfo,
+  loadBookFailure,
   loadSearchBooks,
+  searchBooksFailure,
   searchBooksSuccess,
   storeBookInfo,
 } from './ekart.action';
@@ -42,12 +43,11 @@ export class searchEffects {
               catchError((err: HttpErrorResponse) => {
                 console.log('caught mapping error and rethrowing', err);
                 return of(
-                  loadBookFailureInfo({
+                  searchBooksFailure({
                     errorMsg: err.message,
                     searchBooks: [],
                   })
                 );
-                //  return throwError(err);
               })
             )
           : of(searchBooksSuccess({ searchBooks: [] }));
@@ -74,6 +74,14 @@ export class searchEffects {
                   authors: data.volumeInfo?.authors,
                 };
                 return storeBookInfo({ bookInfo: obj });
+              }),
+              catchError((error) => {
+                return of(
+                  loadBookFailure({
+                    errorMsg: error.message,
+                    bookInfo: { id: '' },
+                  })
+                );
               })
             )
           : of(storeBookInfo({ bookInfo: { id: '' } }));

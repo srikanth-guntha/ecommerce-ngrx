@@ -8,7 +8,6 @@ import {
   loadSearchBooks,
   resetCart,
   updateCartBadge,
-  loadBookFailureInfo,
 } from './ekart.action';
 import { Book, InitState, EkartService } from '@ecommerce/shared/services';
 import {
@@ -19,6 +18,7 @@ import {
   getSearchBooksSuccess,
   showBookInfo,
   getSearchString,
+  loadBookFailureInfo,
 } from './ekart.selector';
 
 @Injectable({
@@ -32,6 +32,7 @@ export class EkartFacade {
   getSearchBooksSuccess$ = this.store.select(getSearchBooksSuccess);
   showBookInfo$ = this.store.select(showBookInfo);
   getBookFailureInfo$ = this.store.select(getBookFailureInfo);
+  loadBookFailureInfo$ = this.store.select(loadBookFailureInfo);
 
   constructor(
     private store: Store<InitState>,

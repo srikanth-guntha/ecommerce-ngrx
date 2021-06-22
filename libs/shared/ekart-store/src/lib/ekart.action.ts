@@ -40,7 +40,12 @@ export const storeBookInfo = createAction(
   props<{ bookInfo: Book }>()
 );
 
-export const loadBookFailureInfo = createAction(
-  'loadBookFailureInfo',
+export const searchBooksFailure = createAction(
+  'searchBooksFailure',
   props<{ errorMsg: string; searchBooks: Book[] }>()
+);
+
+export const loadBookFailure = createAction(
+  'loadBookFailure',
+  props<{ errorMsg: string; bookInfo: Book }>()
 );
