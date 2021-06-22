@@ -4,18 +4,18 @@ export interface Book {
 }
 
 export interface volumeInfo {
-  authors: string[];
-  imageLinks: {
+  authors?: string[];
+  imageLinks?: {
     smallThumbnail: string;
     thumbnail: string;
   };
-  language: string;
-  pageCount: number;
-  printedPageCount: number;
-  publisher: string;
-  title: string;
-  subtitle: string;
-  description: string;
+  language?: string;
+  pageCount?: number;
+  printedPageCount?: number;
+  publisher?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
 }
 
 export interface Books {
@@ -30,6 +30,7 @@ export interface InitState {
   badgeNumber: number;
   booksCollection: Book[];
   bookInfo: Book;
+  errorMessage: string;
 }
 
 export const bookInfo: Book = {

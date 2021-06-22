@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from '@ecommerce/ui/navbar';
 import { AppRoutingModule } from './app.routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiNavbarModule } from '@ecommerce/ui/navbar';
@@ -28,7 +29,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     EffectsModule.forRoot([searchEffects]),
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, NavbarComponent],
   exports: [],
 })
 export class AppModule {}

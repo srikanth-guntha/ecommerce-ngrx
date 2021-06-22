@@ -65,6 +65,13 @@ const _ekartReducer = createReducer(
       ...state,
       bookInfo: action.bookInfo,
     };
+  }),
+  on(ekartActions.loadBookFailureInfo, (state, action) => {
+    return {
+      ...state,
+      errorMessage: action.errorMsg,
+      searchBooks: action.searchBooks,
+    };
   })
 );
 

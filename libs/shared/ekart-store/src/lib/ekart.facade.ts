@@ -4,23 +4,22 @@ import {
   AddToCartSuccess,
   AddToCollection,
   deleteCartItem,
-  getBadgeNumber,
   getBookInfo,
-  getCartItems,
-  getCollectionBooks,
-  getSearchBooksSuccess,
-  getSearchString,
   loadSearchBooks,
   resetCart,
-  showBookInfo,
   updateCartBadge,
-} from '@ecommerce/shared/ekart-store';
+  loadBookFailureInfo,
+} from './ekart.action';
+import { Book, InitState, EkartService } from '@ecommerce/shared/services';
 import {
-  Book,
-  InitState,
-  EkartService,
-  bookInfo,
-} from '@ecommerce/shared/services';
+  getBookFailureInfo,
+  getCartItems,
+  getBadgeNumber,
+  getCollectionBooks,
+  getSearchBooksSuccess,
+  showBookInfo,
+  getSearchString,
+} from './ekart.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +31,7 @@ export class EkartFacade {
   getSearchString$ = this.store.select(getSearchString);
   getSearchBooksSuccess$ = this.store.select(getSearchBooksSuccess);
   showBookInfo$ = this.store.select(showBookInfo);
+  getBookFailureInfo$ = this.store.select(getBookFailureInfo);
 
   constructor(
     private store: Store<InitState>,

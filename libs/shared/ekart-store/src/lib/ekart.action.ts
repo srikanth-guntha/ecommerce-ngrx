@@ -34,7 +34,13 @@ export const getBookInfo = createAction(
   'getBookInfo',
   props<{ bookId: string }>()
 );
+
 export const storeBookInfo = createAction(
   'storeBookInfo',
   props<{ bookInfo: Book }>()
+);
+
+export const loadBookFailureInfo = createAction(
+  'loadBookFailureInfo',
+  props<{ errorMsg: string; searchBooks: Book[] }>()
 );

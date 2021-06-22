@@ -11,6 +11,10 @@ import { EkartFacade } from '@ecommerce/shared/ekart-store';
 export class MatCardListComponent {
   @Input()
   bookList!: Book[];
+
+  @Input()
+  errorMessage!: string;
+
   @Input()
   showDelete!: boolean;
 

@@ -5,4 +5,5 @@
             (change)="searchBooksBySearchName(input.value)" #input>
     </mat-form-field>
 </form>
-<ecommerce-mat-card-list [showDelete]="showDelete" [bookList]="searchBooks"></ecommerce-mat-card-list>
+<ecommerce-mat-card-list [showDelete]="showDelete" [errorMessage]="errorMessage" [bookList]="searchBooks"></ecommerce-mat-card-list>
+<!-- <div class="error-message" *ngIf="errorMessage"> {{errorMessage}}</div> -->

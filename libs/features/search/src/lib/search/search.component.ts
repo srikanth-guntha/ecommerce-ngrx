@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   public searchString$!: Observable<string>;
   public searchBooks: Book[] = [];
   public showDelete = false;
+  public errorMessage = '';
   searchSubscription: Subscription = new Subscription();
 
   constructor(private ekartFacade: EkartFacade) {}
@@ -27,10 +28,14 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.searchBooks = searchBooks;
       }
     );
+    this.ekartFacade.getBookFailureInfo$.subscribe((error) => {
+      console.log(error);
+      //this.errorMessage = error;
+      if (error) this.errorMessage = 'search books list is empty due to error';
+    });
   }
 
   searchBooksBySearchName(searchString: string) {
-    console.log(searchString);
     this.ekartFacade.loadSearchBooks(searchString);
   }
 

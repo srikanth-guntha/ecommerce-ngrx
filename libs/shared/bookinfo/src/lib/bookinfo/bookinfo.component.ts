@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EkartService } from '@ecommerce/shared/services';
 import { Book } from '@ecommerce/shared/services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -23,7 +22,6 @@ export class BookinfoComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: ActivatedRoute,
-    private ekartService: EkartService,
     private route: Router,
     private ekartFacade: EkartFacade
   ) {}
